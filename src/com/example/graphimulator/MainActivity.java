@@ -1,36 +1,43 @@
 package com.example.graphimulator;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+public class MainActivity extends Activity implements View.OnClickListener {
+	Button help, about;
 
-public class MainActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		about = (Button) findViewById(R.id.about_button);
+		help = (Button) findViewById(R.id.help_button);
+		help.setOnClickListener(this);
+		about.setOnClickListener(this);
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.about_button:
+			Intent inten = new Intent("com.example.graphimulator.ABOUT");
+			startActivity(inten);
+			break;
+		case R.id.help_button:
+			Intent intenT = new Intent("com.example.graphimulator.HELP");
+			startActivity(intenT);
+			break;
 
+		default:
+			break;
+		}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+	public void dismis(View view) {
+		finish();
+	}
 }
